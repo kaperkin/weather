@@ -12,7 +12,7 @@
         }
         var lat = 45;
         var lon = 139;
-        var baseURL = 'http://api.openweathermap.org/data/2.5/forecast/weather?lat=' + lat + '&lon=' + lon + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
+        var baseURL = 'https://api.openweathermap.org/data/2.5/forecast/weather?lat=' + lat + '&lon=' + lon + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
         $.getJSON(baseURL).done(function (json) {
             $('#api').html(json.coords);
             console.log("baseURL: " + baseURL);
