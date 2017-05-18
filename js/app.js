@@ -14,7 +14,7 @@
     var lat = -16.92;
     var lon = 145.77;
     var zip = $('#zipcode').val();
-    var baseURL = 'https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?zip=' + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
+    var baseURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?zip=' + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
     submitBtn.click(function(){
       $.getJSON(baseURL).done(function (data) {
         var resData = JSON.stringify(data);
