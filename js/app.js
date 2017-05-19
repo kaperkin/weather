@@ -18,11 +18,15 @@
         var resData = JSON.stringify(data);
         console.log(resData);
         resData = $.parseJSON(resData);
+var city = resData.name;
         var weather = resData.weather[0];
-        var icon = resData.weather[0]["icon"];
+        var icon = weather["icon"];
         var image = "http://openweathermap.org/img/w/" + icon + ".png";
-        $('#api').text("The weather is currently " + weather["description"] + ". ");
-        $('#api').append("<img src="+ image + " alt='weather icon' />");
+        var tempK = resData.main.temp;
+        var tempF = Math.round((tempK * (9/5) - 459.67));
+        var tempC = Math.round((tempK - 273.15));
+        $('#api').text("The weather in " + city + " is currently " + weather["description"] + " and the temperature is " + tempF +" degrees.");
+        $('#api').append("<img class='icon img-rounded' src="+ image + " alt='weather icon' />");
       }).fail(function (jqxhr, textStatus, err) {
         $('#api').html(textStatus + ": " + err);
       });
