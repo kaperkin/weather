@@ -11,8 +11,6 @@
     //            })
     //        }
     var submitBtn = $('#submit');
-    var lat = -16.92;
-    var lon = 145.77;
     submitBtn.click(function(){
       var zip = $('#zipcode').val();
       var baseURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?zip=' + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
@@ -21,7 +19,10 @@
         console.log(resData);
         resData = $.parseJSON(resData);
         var weather = resData.weather[0];
-        $('#api').text(weather["description"]);
+        var icon = resData.weather[0]["icon"];
+        var image = "http://openweathermap.org/img/w/" + icon + ".png";
+        $('#api').text("The weather is currently " + weather["description"] + ". ");
+        $('#api').append("<img src="+ image + " alt='weather icon' />");
       }).fail(function (jqxhr, textStatus, err) {
         $('#api').html(textStatus + ": " + err);
       });
