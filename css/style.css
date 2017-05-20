@@ -1,3 +1,13 @@
-#api{
+body {
+  background-color: rgba(66, 176, 244, 0.4);
+}
+#description, .temperature{
   font-size: 2rem;
+}
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+  border-radius: 20px;
+}
+.toggle.ios .toggle-handle {
+  border-radius: 20px;
 }
