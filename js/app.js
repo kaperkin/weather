@@ -12,9 +12,19 @@
     var submitBtn = $('#submit');
     $("#toggleDiv").hide();
 
+function getTempF(temp){
+  return Math.round((temp * (9/5) - 459.67));
+}
+
+function getTempC(temp){
+  return Math.round((temp - 273.15));
+}
 
 function getForecast(city, country){
-  var baseURLForecast = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=" + city +"," + country + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
+  $("#forecast").empty();
+  $("#forecast").append("<div class='col-lg-1' id='forecastBuffer'></div>")
+  var baseURLForecast = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q="
+  + city +"," + country + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
   console.log("calling forecast");
   $.getJSON(baseURLForecast).done(function (data) {
     var resDataForecast = JSON.stringify(data);
@@ -23,13 +33,47 @@ function getForecast(city, country){
     // LIST HAS FORECAST FOR EVERY THREE HOURS FOR NEXT FIVE DAYS
     console.log(resDataForecast.list);
 
-    for(var i=0; i < 5; i++){
+    for(var i=4; i < resDataForecastList.length; i+=8){
       var date = new Date((resDataForecastList[i].dt)*1000);
-      var day = date.getUTCDate();
-      var month = date.getUTCMonth() + 1;
-      var year = date.getUTCFullYear();
-      console.log(resDataForecastList.length);
-      $("#forecast").append("<p class='forecast'>"+ month + "/" + day + "/" + year + "    " + resDataForecastList[i] + "</p>");
+      var dayNum = date.getUTCDay();
+      var day = "";
+      var icon = "http://openweathermap.org/img/w/" + resDataForecastList[i].weather[0]["icon"] + ".png";
+
+
+      switch(dayNum){
+        case 0:
+        day = "Sunday";
+        break;
+        case 1:
+        day = "Monday";
+        break;
+        case 2:
+        day = "Tuesday";
+        break;
+        case 3:
+        day = "Wednesday";
+        break;
+        case 4:
+        day = "Thursday";
+        break;
+        case 5:
+        day = "Friday";
+        break;
+        case 6:
+        day = "Saturday";
+        break;
+      }
+
+      $("#forecast").append("<div class='forecast col-lg-2'>" + "<p class='forecastBanner'>"
+      + day + "</p><p class='forecastIcon'><img src='" + icon + "' alt='weather icon' /></p>"
+      + "<p class='temp'><span class='temperatureF'>" + getTempF(resDataForecastList[i].main["temp"])
+      + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>" +
+      getTempC(resDataForecastList[i].main["temp"]) + "&#730;" + "</span></p></div>"
+      );
+    }
+    var tempArrayCHide = document.getElementsByClassName("temperatureC");
+    for(var i=0; i<tempArrayCHide.length; i++){
+      $(tempArrayCHide[i]).hide();
     }
     //when API fails
   }).fail(function (jqxhr, textStatus, err) {
@@ -52,18 +96,18 @@ function getForecast(city, country){
         var icon = weather["icon"];
         var image = "http://openweathermap.org/img/w/" + icon + ".png";
         var tempK = resData.main.temp;
-        var tempF = Math.round((tempK * (9/5) - 459.67));
-        var tempC = Math.round((tempK - 273.15));
+        var tempF = getTempF(tempK);
+        var tempC = getTempC(tempK);
         $('#description').text("Current weather in " + city + " is " + weather["description"] + ".");
         $('#description').append("<img class='icon img-rounded' src="+ image + " alt='weather icon' />");
         $("#temperatureF").text("Temperature: " + tempF);
         $("#temperatureC").text("Temperature: " + tempC);
-        $("#temperatureC").hide();
         $("#toggleDiv").show();
 
+        //call API forecast
+        getForecast(city,country);
 
-//call API forecast
-//getForecast(city,country);
+
         //when API fails
       }).fail(function (jqxhr, textStatus, err) {
         $('#api').html(textStatus + ": " + err);
@@ -79,8 +123,15 @@ $('#tempBtnC').click(function() {
   $('#tempBtnF').toggleClass('active');
   $('#tempBtnF').toggleClass('btn-default');
   $('#tempBtnF').toggleClass('btn-primary');
-    $("#temperatureC").show();
-    $("#temperatureF").hide();
+    var tempArrayCShow = document.getElementsByClassName("temperatureC");
+    for(var i=0; i<tempArrayCShow.length; i++){
+      $(tempArrayCShow[i]).show();
+    }
+    var tempArrayFHide = document.getElementsByClassName("temperatureF");
+    for(var i=0; i<tempArrayFHide.length; i++){
+      $(tempArrayFHide[i]).hide();
+    }
+
 });
 
 $('#tempBtnF').click(function() {
@@ -91,8 +142,15 @@ $('#tempBtnF').click(function() {
     $('#tempBtnC').toggleClass('active');
     $('#tempBtnC').toggleClass('btn-default');
     $('#tempBtnC').toggleClass('btn-primary');
-    $("#temperatureF").show();
-    $("#temperatureC").hide();
+
+    var tempArrayCHide = document.getElementsByClassName("temperatureC");
+    for(var i=0; i<tempArrayCHide.length; i++){
+      $(tempArrayCHide[i]).hide();
+    }
+    var tempArrayFShow = document.getElementsByClassName("temperatureF");
+    for(var i=0; i<tempArrayFShow.length; i++){
+      $(tempArrayFShow[i]).show();
+    }
 });
 //end toggle
 

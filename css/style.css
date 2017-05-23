@@ -3,7 +3,7 @@ todo
 1. change temp to Teperature: XX toggle with degree symbol -------
 2. Add option to get weather by city, state, country
 3. Current Weather in City is description icon ------
-4. Add five day forcast
+4. Add five day forcast ------------
 
 */
 
@@ -15,7 +15,9 @@ body {
   background-color: rgb(235, 235, 235);
 
 }
-
+#forecast {
+  min-height: 200px;
+}
 #description, .temperature{
   font-size: 2rem;
 }
@@ -36,12 +38,28 @@ body {
   min-height: 80px;
 }
 
+.forecast {
+  background-color: rgb(235, 235, 235);
+  border: 1px solid #fff;
+  text-align: center;
+  margin-top: 3%;
+  padding: 0;
+}
+
+.forecastBanner{
+  background-color: rgba(66, 176, 244, .6);
+  border-bottom: 2px solid #333;
+  font-size: 1.8rem;
+  font-weight: 600;
+
+}
+
 .foot {
     background-color: rgba(66, 176, 244, .6);
     margin-bottom: 0;
     margin-left: 0;
     width: 100%;
-    position: absolute;
+  /*  position: absolute;*/
     bottom: 0;
     left: 0;
     right: 0;
