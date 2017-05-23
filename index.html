@@ -1,74 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='x-us-compatible' content='ie-edge'>
-    <title>Whatever the Weather</title>
-    <meta name='description' content="Local weather App">
-    <meta name='viewport' content='width-devide-width, initial-scale=1'>
+  <meta charset='utf-8'>
+  <meta http-equiv='x-us-compatible' content='ie-edge'>
+  <title>Whatever the Weather</title>
+  <meta name='description' content="Local weather App">
+  <meta name='viewport' content='width-devide-width, initial-scale=1'>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+  integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-<!--bootstrap toggle -->
-          <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+  integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <!--bootstrap toggle -->
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
-    <!-- my stylesheet-->
-    <link rel="stylesheet" href="css/style.css">
+  <!-- my stylesheet-->
+  <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
-<div class="jumbotron">
-    <div class="container">
+  <div class="container">
+    <div class="jumbotron">
+      <div class="container">
         <h1>Whatever the Weather</h1>
 
         <h2>Whether the weather is fine, or whether the weather is hot, we'll whether the weather whatever the weather,
-            whether we like it or not!</h2>
+          whether we like it or not!</h2>
+        </div>
+      </div>
     </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="" id="myLocation">
-        <p>My Zipcode: </p>
-        <input id="zipcode"/>
-        <button class='btn defaultbtn' id="submit"/>Submit</button>
-    </div>
-    <div id="description"></div>
+      <div class="container">
+        <div class="row">
+          <div class="" id="myLocation">
+            <p>My Zipcode: </p>
+            <input id="zipcode"/>
+            <button class='btn defaultbtn' id="submit"/>Submit</button>
+          </div>
+          <div id="description"></div>
 
-    <div class="temperature" id="temperatureF"></div>
-    <div class="temperature" id="temperatureC"></div>
-    <div id="toggleDiv">
-    <input id="toggle" checked data-toggle="toggle" type="checkbox" data-size="small" data-on="F" data-off="C" data-style="ios">
-  </div>
-</div>
-</div>
-    <div class="foot row"><p class="col-lg-6 col-lg-offset-1">Made By: <a href="http://www.kaleenaperkins.com"
-                                                                          target="_blank">Kaleena Perkins</a></p>
+          <p class="temperature" id="temperatureF"></p>
+          <p class="temperature" id="temperatureC"></p>
+          <div id="toggleDiv">
+            <div class="btn-group btn-toggle">
+              <button class="btn btn-primary active" id="tempBtnF">F&#730;</button>
+              <button class="btn btn-default" id="tempBtnC">C&#730;</button>
+            </div>
+          </div>
+        </div>
 
-        <p class="col-lg-5 text-right">Connect with me:
-            <a href="mailto:kaleena.perkins@gmail.com?Subject=weather" target="_top"><span>
-                    class="fa fa-envelope"></span></a>
+<div class="row" id="forecast">
+</div>
+
+      </div>
+      <div class="foot row"><p class="col-lg-6 col-lg-offset-1">Made By: <a href="http://www.kaleenaperkins.com"
+        target="_blank">Kaleena Perkins</a></p>
+
+        <p class="col-lg-4 text-right">Connect with me:
+          <a href="mailto:kaleena.perkins@gmail.com?Subject=weather" target="_top"><span
+            class="fa fa-envelope"></span></a>
             <a href="https://twitter.com/kaperkin"><span class="fa fa-twitter"></span></a>
             <a href="https://www.linkedin.com/in/kaleenaperkins"><span class="fa fa-linkedin"></span></a>
-        </p>
+          </p>
+        </div>
+      </div>
     </div>
-</div>
-</body>
-<!------------------jQuery CDN------------->
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"
-		integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-		crossorigin="anonymous"></script>
-    <!--Bootstrap Toggle -->
-        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+  </body>
+  <!------------------jQuery CDN------------->
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+  integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+  crossorigin="anonymous"></script>
+  <!--Bootstrap Toggle -->
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-        <!-- My JS -->
-<script type="text/javascript" src="js/app.js"></script>
-</html>
+  <!-- My JS -->
+  <script type="text/javascript" src="js/app.js"></script>
+  </html>
