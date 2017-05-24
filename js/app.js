@@ -10,7 +10,7 @@
     //            })
     //        }
     var submitBtn = $('#submit');
-    $("#toggleDiv").hide();
+    $("#tempBtn").hide();
 
 function getTempF(temp){
   return Math.round((temp * (9/5) - 459.67));
@@ -84,7 +84,8 @@ function getForecast(city, country){
     // when submit button is clicked
     submitBtn.click(function(){
       var zip = $('#zipcode').val();
-      var baseURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?zip=' + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
+      var baseURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?zip='
+      + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
 
       // API Call Current Weather
       $.getJSON(baseURL).done(function (data) {
@@ -102,7 +103,7 @@ function getForecast(city, country){
         $('#description').append("<img class='icon img-rounded' src="+ image + " alt='weather icon' />");
         $("#temperatureF").text("Temperature: " + tempF);
         $("#temperatureC").text("Temperature: " + tempC);
-        $("#toggleDiv").show();
+        $("#tempBtn").show();
 
         //call API forecast
         getForecast(city,country);
@@ -115,14 +116,10 @@ function getForecast(city, country){
     });
 
 // populate toggle
-$('#tempBtnC').click(function() {
-  $('#tempBtnC').toggleClass('active');
-  $('#tempBtnC').toggleClass('btn-default');
-  $('#tempBtnC').toggleClass('btn-primary');
-  //change tempBtnF
-  $('#tempBtnF').toggleClass('active');
-  $('#tempBtnF').toggleClass('btn-default');
-  $('#tempBtnF').toggleClass('btn-primary');
+$('#tempBtn').click(function() {
+  var cBtn = $("#tempBtn").val();
+  if(cBtn==("F")){
+    console.log("Celsius");
     var tempArrayCShow = document.getElementsByClassName("temperatureC");
     for(var i=0; i<tempArrayCShow.length; i++){
       $(tempArrayCShow[i]).show();
@@ -131,18 +128,9 @@ $('#tempBtnC').click(function() {
     for(var i=0; i<tempArrayFHide.length; i++){
       $(tempArrayFHide[i]).hide();
     }
-
-});
-
-$('#tempBtnF').click(function() {
-  $('#tempBtnF').toggleClass('active');
-  $('#tempBtnF').toggleClass('btn-default')
-    $('#tempBtnF').toggleClass('btn-primary');
-    // change classes on tempBtnC
-    $('#tempBtnC').toggleClass('active');
-    $('#tempBtnC').toggleClass('btn-default');
-    $('#tempBtnC').toggleClass('btn-primary');
-
+    $("#tempBtn").val("C");
+    $("#tempBtn").html("C&#730;")
+  } else{
     var tempArrayCHide = document.getElementsByClassName("temperatureC");
     for(var i=0; i<tempArrayCHide.length; i++){
       $(tempArrayCHide[i]).hide();
@@ -151,7 +139,15 @@ $('#tempBtnF').click(function() {
     for(var i=0; i<tempArrayFShow.length; i++){
       $(tempArrayFShow[i]).show();
     }
+    $("#tempBtn").val("F");
+    $("#tempBtn").html("F&#730;")
+  }
+  $('#tempBtn').toggleClass('active');
+  $('#tempBtn').toggleClass('btn-default');
+  $('#tempBtn').toggleClass('btn-primary');
+
 });
+
 //end toggle
 
 

@@ -22,15 +22,19 @@ body {
   font-size: 2rem;
 }
 
-.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+/*.toggle.ios, .toggle-on.ios, .toggle-off.ios {
   border-radius: 20px;
 }
 .toggle.ios .toggle-handle {
   border-radius: 20px;
 }
-
+*/
 #toggleDiv, .temperature {
   display: inline;
+}
+
+#tempBtn{
+  vertical-align: baseline;
 }
 
 .icon {
