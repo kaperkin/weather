@@ -1,11 +1,3 @@
-/*
-todo
-1. change temp to Teperature: XX toggle with degree symbol -------
-2. Add option to get weather by city, state, country
-3. Current Weather in City is description icon ------
-4. Add five day forcast ------------
-
-*/
 
 body {
   background-color: rgba(66, 176, 244, 0.4);
@@ -22,13 +14,6 @@ body {
   font-size: 2rem;
 }
 
-/*.toggle.ios, .toggle-on.ios, .toggle-off.ios {
-  border-radius: 20px;
-}
-.toggle.ios .toggle-handle {
-  border-radius: 20px;
-}
-*/
 #toggleDiv, .temperature {
   display: inline;
 }

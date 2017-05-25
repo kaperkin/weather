@@ -121,7 +121,13 @@ function getWeather(baseUrl){
 
     //when API fails
   }).fail(function (jqxhr, textStatus, err) {
-    $('#description').html(textStatus + ": " + err);
+    $('#description').html($('#zipcode').val() + " is not a valid zipcode");
+    $('#forecast').text("");
+    $("#temperatureF").text("");
+    $("#temperatureC").text("");
+      $("#tempBtn").hide();
+
+
   });
 }
 
