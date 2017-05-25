@@ -131,6 +131,12 @@ function getWeather(baseUrl){
   });
 }
 
+$('#zipcode').keypress(function(e){
+        if(e.which == 13){//Enter key pressed
+            $('#submit').click();//Trigger search button click event
+        }
+    });
+
 
 // when submit button is clicked
 submitBtn.click(function(){
