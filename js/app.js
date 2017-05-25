@@ -1,16 +1,32 @@
 (function ($) {
-    //  if (navigator.geolocation) {
-    //    console.log('navigator.geolocation found');
-    //  navigator.geolocation.getCurrentPosition(function (position) {
-    //    console.log(position);
-    //                $('#myLocation').html("found");
-    //            }, function (err) {
-    //                $('#myLocation').html(err.code + ": " + err.message);
-    //                console.log(err.code + ": " + err.message);
-    //            })
-    //        }
-    var submitBtn = $('#submit');
-    $("#tempBtn").hide();
+  /*
+  if (navigator.geolocation) {
+  console.log('navigator.geolocation found');
+  navigator.geolocation.getCurrentPosition(function (position) {
+  console.log(position);
+  $('#myLocation').html("found");
+}, function (err) {
+$('#myLocation').html(err.code + ": " + err.message);
+console.log(err.code + ": " + err.message);
+})
+}
+*/
+  var geoURL = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB1JHX9rQpFz9vvN-9SV9ShQq_BFEEYXQY";
+  $.post(geoURL, (function (data) {
+    var geoData = JSON.stringify(data);
+    console.log(geoData);
+    geoData = $.parseJSON(geoData);
+    var lat = geoData.location['lat'];
+    var long = geoData.location['lng'];
+    var baseUrl = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat='
+    + lat + "&lon=" + long + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
+    getWeather(baseUrl);
+  }));
+
+
+
+var submitBtn = $('#submit');
+$("#tempBtn").hide();
 
 function getTempF(temp){
   return Math.round((temp * (9/5) - 459.67));
@@ -38,7 +54,6 @@ function getForecast(city, country){
       var dayNum = date.getUTCDay();
       var day = "";
       var icon = "http://openweathermap.org/img/w/" + resDataForecastList[i].weather[0]["icon"] + ".png";
-
 
       switch(dayNum){
         case 0:
@@ -69,51 +84,93 @@ function getForecast(city, country){
       + "<p class='temp'><span class='temperatureF'>" + getTempF(resDataForecastList[i].main["temp"])
       + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>" +
       getTempC(resDataForecastList[i].main["temp"]) + "&#730;" + "</span></p></div>"
-      );
-    }
-    var tempArrayCHide = document.getElementsByClassName("temperatureC");
-    for(var i=0; i<tempArrayCHide.length; i++){
-      $(tempArrayCHide[i]).hide();
-    }
+    );
+  }
+  var tempArrayCHide = document.getElementsByClassName("temperatureC");
+  for(var i=0; i<tempArrayCHide.length; i++){
+    $(tempArrayCHide[i]).hide();
+  }
+  //when API fails
+}).fail(function (jqxhr, textStatus, err) {
+  $('#api').html(textStatus + ": " + err);
+});
+}
+
+function getWeather(baseUrl){
+  // API Call Current Weather
+  console.log("getWeather called");
+  $.getJSON(baseUrl).done(function (data) {
+    var resData = JSON.stringify(data);
+    resData = $.parseJSON(resData);
+    var city = resData.name;
+    var country = (resData.sys.country).toUpperCase();
+    var weather = resData.weather[0];
+    var icon = weather["icon"];
+    var image = "http://openweathermap.org/img/w/" + icon + ".png";
+    var tempK = resData.main.temp;
+    var tempF = getTempF(tempK);
+    var tempC = getTempC(tempK);
+    $('#description').text("Current weather in " + city + " is " + weather["description"] + ".");
+    $('#description').append("<img class='icon img-rounded' src="+ image + " alt='weather icon' />");
+    $("#temperatureF").text("Temperature: " + tempF);
+    $("#temperatureC").text("Temperature: " + tempC);
+    $("#tempBtn").show();
+
+    //call API forecast
+    getForecast(city,country);
+
     //when API fails
   }).fail(function (jqxhr, textStatus, err) {
-    $('#api').html(textStatus + ": " + err);
+    $('#description').html(textStatus + ": " + err);
   });
 }
 
-    // when submit button is clicked
-    submitBtn.click(function(){
-      var zip = $('#zipcode').val();
-      var baseURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?zip='
-      + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
 
-      // API Call Current Weather
-      $.getJSON(baseURL).done(function (data) {
-        var resData = JSON.stringify(data);
-        resData = $.parseJSON(resData);
-        var city = resData.name;
-        var country = (resData.sys.country).toUpperCase();
-        var weather = resData.weather[0];
-        var icon = weather["icon"];
-        var image = "http://openweathermap.org/img/w/" + icon + ".png";
-        var tempK = resData.main.temp;
-        var tempF = getTempF(tempK);
-        var tempC = getTempC(tempK);
-        $('#description').text("Current weather in " + city + " is " + weather["description"] + ".");
-        $('#description').append("<img class='icon img-rounded' src="+ image + " alt='weather icon' />");
-        $("#temperatureF").text("Temperature: " + tempF);
-        $("#temperatureC").text("Temperature: " + tempC);
-        $("#tempBtn").show();
+// when submit button is clicked
+submitBtn.click(function(){
 
-        //call API forecast
-        getForecast(city,country);
+  //Using $.ajax()  var zip = $('#zipcode').val();
+  /*  var baseUrl = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?zip=" + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5&origin=*";
+  $.ajax({
+  type: "GET",
+  dataType: "jsonp",
+  url: baseUrl,
+  crossDomain: false,
+  headers: {'X-Requested-With': 'XMLHttpRequest'},
+  success: function(data){
+  console.log("ajax done");
+  var resData = JSON.stringify(data);
+  console.log(resData);
+  resData = $.parseJSON(resData);
+  var city = resData.name;
+  var country = (resData.sys.country).toUpperCase();
+  var weather = resData.weather[0];
+  var icon = weather["icon"];
+  var image = "http://openweathermap.org/img/w/" + icon + ".png";
+  var tempK = resData.main.temp;
+  var tempF = getTempF(tempK);
+  var tempC = getTempC(tempK);
+  $('#description').text("Current weather in " + city + " is " + weather["description"] + ".");
+  $('#description').append("<img class='icon img-rounded' src="+ image + " alt='weather icon' />");
+  $("#temperatureF").text("Temperature: " + tempF);
+  $("#temperatureC").text("Temperature: " + tempC);
+  $("#tempBtn").show();
 
+  //call API forecast
+  getForecast(city,country);
 
-        //when API fails
-      }).fail(function (jqxhr, textStatus, err) {
-        $('#api').html(textStatus + ": " + err);
-      });
-    });
+}
+});
+}); */
+//end $.ajax()
+
+var zip = $('#zipcode').val();
+var baseUrl = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?zip='
++ zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
+console.log(baseUrl);
+getWeather(baseUrl);
+});
+
 
 // populate toggle
 $('#tempBtn').click(function() {
