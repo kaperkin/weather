@@ -1,8 +1,11 @@
 /*
 To Do
-1. Trigger submit button on enter
-2.
-3.
+1. Trigger submit button on enter ---- done, need to push
+2. Move submit button to right of input ----- done, need to push
+3. Add map snipit with pin on location
+https://wiki.openstreetmap.org/wiki/Frameworks#Webmaps
+https://wiki.openstreetmap.org/wiki/Overpass_API
+4. make the weather icons in forecast larger ----done, need to push
 
 */
 
@@ -10,9 +13,13 @@ body {
   background-color: rgba(66, 176, 244, 0.4);
 }
 
+.zipcode{
+  display:inline;
+}
+
 .btn {
   background-color: rgb(235, 235, 235);
-
+vertical-align: baseline;
 }
 #forecast {
   min-height: 200px;
@@ -23,10 +30,6 @@ body {
 
 #toggleDiv, .temperature {
   display: inline;
-}
-
-#tempBtn{
-  vertical-align: baseline;
 }
 
 .icon {
@@ -48,6 +51,14 @@ body {
   font-size: 1.8rem;
   font-weight: 600;
 
+}
+
+.temp span {
+  font-size: 2rem;
+}
+
+#map {
+height: 100%;
 }
 
 .foot {

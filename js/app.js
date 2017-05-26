@@ -11,6 +11,20 @@ console.log(err.code + ": " + err.message);
 })
 }
 */
+
+// Map sample
+function initMap(lat, long) {
+  $('#map').empty();
+        $('#map').append("<img src='https://maps.googleapis.com/maps/api/staticmap?center="
+         + lat + "," + long + "&zoom=13&size=400x500&maptype=hybrid&markers=color:#4256f4|" + lat + "|" + long +"'/>")
+      }
+///end map sample
+
+
+
+
+
+
   var geoURL = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB1JHX9rQpFz9vvN-9SV9ShQq_BFEEYXQY";
   $.post(geoURL, (function (data) {
     var geoData = JSON.stringify(data);
@@ -80,7 +94,7 @@ function getForecast(city, country){
       }
 
       $("#forecast").append("<div class='forecast col-lg-2'>" + "<p class='forecastBanner'>"
-      + day + "</p><p class='forecastIcon'><img src='" + icon + "' alt='weather icon' /></p>"
+      + day + "</p><p class='forecastIcon'><img class='icon' src='" + icon + "' alt='weather icon' /></p>"
       + "<p class='temp'><span class='temperatureF'>" + getTempF(resDataForecastList[i].main["temp"])
       + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>" +
       getTempC(resDataForecastList[i].main["temp"]) + "&#730;" + "</span></p></div>"
@@ -119,6 +133,9 @@ function getWeather(baseUrl){
     //call API forecast
     getForecast(city,country);
 
+    //create map
+    initMap(resData.coord["lat"], resData.coord["lon"]);
+
     //when API fails
   }).fail(function (jqxhr, textStatus, err) {
     $('#description').html($('#zipcode').val() + " is not a valid zipcode");
@@ -131,6 +148,7 @@ function getWeather(baseUrl){
   });
 }
 
+// ad keybinding for enter to trigger submit click
 $('#zipcode').keypress(function(e){
         if(e.which == 13){//Enter key pressed
             $('#submit').click();//Trigger search button click event
@@ -218,7 +236,6 @@ $('#tempBtn').click(function() {
 });
 
 //end toggle
-
 
 
 }(jQuery));

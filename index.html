@@ -10,7 +10,7 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
   integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
+  
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
   integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
@@ -36,49 +36,54 @@
         </div>
       </div>
     </div>
-      <div class="container">
-        <div class="row">
-          <div class="" id="myLocation">
-            <p>Zipcode:
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6" id="myLocation">
+          <p class="zipcode">Zipcode:
             <input id="zipcode"/>
           </p>
-            <button class='btn defaultbtn' id="submit"/>Submit</button>
-          </div>
+          <button class='btn defaultbtn' id="submit"/>Submit</button>
           <div id="description"></div>
-
           <p class="temperature temperatureF" id="temperatureF"></p>
           <p class="temperature temperatureC" id="temperatureC"></p>
-        <!--  <div id="toggleDiv"> -->
+          <!--  <div id="toggleDiv"> -->
           <!--  <div class="btn-group btn-toggle"> -->
-              <button class="btn btn-default" id="tempBtn" value="F">F&#730;</button>
+          <button class="btn btn-default" id="tempBtn" value="F">F&#730;</button>
           <!--  </div> -->
-        <!--  </div> -->
+          <!--  </div> -->
         </div>
+        <div class="col-lg-6">
+          <div id="map"></div>
 
-<div class="row" id="forecast">
-</div>
 
+        </div>
       </div>
-      <div class="foot row"><p class="col-lg-6 col-lg-offset-1">Made By: <a href="http://www.kaleenaperkins.com"
-        target="_blank">Kaleena Perkins</a></p>
 
-        <p class="col-lg-4 text-right">Connect with me:
-          <a href="mailto:kaleena.perkins@gmail.com?Subject=weather" target="_top"><span
-            class="fa fa-envelope"></span></a>
-            <a href="https://twitter.com/kaperkin"><span class="fa fa-twitter"></span></a>
-            <a href="https://www.linkedin.com/in/kaleenaperkins"><span class="fa fa-linkedin"></span></a>
-          </p>
-        </div>
+      <div class="row" id="forecast">
+      </div>
+
+    </div>
+    <div class="foot row"><p class="col-lg-6 col-lg-offset-1">Made By: <a href="http://www.kaleenaperkins.com"
+      target="_blank">Kaleena Perkins</a></p>
+
+      <p class="col-lg-4 text-right">Connect with me:
+        <a href="mailto:kaleena.perkins@gmail.com?Subject=weather" target="_top"><span
+          class="fa fa-envelope"></span></a>
+          <a href="https://twitter.com/kaperkin"><span class="fa fa-twitter"></span></a>
+          <a href="https://www.linkedin.com/in/kaleenaperkins"><span class="fa fa-linkedin"></span></a>
+        </p>
       </div>
     </div>
-  </body>
-  <!-- jQuery CDN -->
-  <script src="https://code.jquery.com/jquery-3.1.0.min.js"
-  integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-  crossorigin="anonymous"></script>
-  <!--Bootstrap Toggle -->
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+  </div>
+</body>
 
-  <!-- My JS -->
-  <script type="text/javascript" src="js/app.js"></script>
-  </html>
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"
+integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+crossorigin="anonymous"></script>
+<!--Bootstrap Toggle -->
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+<!-- My JS -->
+<script type="text/javascript" src="js/app.js"></script>
+</html>
