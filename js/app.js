@@ -15,8 +15,8 @@ console.log(err.code + ": " + err.message);
 // Map sample
 function initMap(lat, long) {
   $('#map').empty();
-        $('#map').append("<img src='https://maps.googleapis.com/maps/api/staticmap?center="
-         + lat + "," + long + "&zoom=13&size=400x500&maptype=hybrid&markers=color:#4256f4|" + lat + "|" + long +"'/>")
+  var src = "src='https://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + long + "&amp;zoom=13&amp;size=400x500&amp;maptype=hybrid&amp;markers=color:#4256f4|" + lat + "|" + long;
+        $('#map').append("<img " + src +"'/>")
       }
 ///end map sample
 
