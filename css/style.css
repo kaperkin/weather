@@ -1,11 +1,6 @@
 /*
 To Do
-1. Trigger submit button on enter ---- done, need to push
-2. Move submit button to right of input ----- done, need to push
-3. Add map snipit with pin on location
-https://wiki.openstreetmap.org/wiki/Frameworks#Webmaps
-https://wiki.openstreetmap.org/wiki/Overpass_API
-4. make the weather icons in forecast larger ----done, need to push
+
 
 */
 
@@ -43,6 +38,10 @@ vertical-align: baseline;
   text-align: center;
   margin-top: 3%;
   padding: 0;
+}
+
+#forecast {
+  margin-bottom: 40px;
 }
 
 .forecastBanner{

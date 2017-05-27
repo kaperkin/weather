@@ -15,7 +15,7 @@ console.log(err.code + ": " + err.message);
 // Map sample
 function initMap(lat, long) {
   $('#map').empty();
-  var src = "src='https://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + long + "&amp;zoom=13&amp;size=400x500&amp;maptype=hybrid&amp;markers=color:#4256f4|" + lat + "|" + long;
+  var src = "src='https://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + long + "&amp;zoom=13&amp;size=350x350&amp;maptype=hybrid";
         $('#map').append("<img " + src +"'/>")
       }
 ///end map sample
@@ -50,6 +50,38 @@ function getTempC(temp){
   return Math.round((temp - 273.15));
 }
 
+function getPForLoop(currentHour){
+currentHour= currentHour-6;
+  var p = 0;
+
+  if((currentHour >21)|| currentHour==0){
+    console.log("Forecast start at 0, p set to 5");
+    p = 5;
+  } else if(currentHour >18){
+    console.log("Forecast start at 21, p set to 6");
+    p = 6;
+  } else if(currentHour >15){
+    console.log("Forecast start at 18, p set to 7");
+    p = 7;
+  } else if(currentHour >12){
+    console.log("Forecast start at 15, p set to 0");
+    p = 0;
+  } else if(currentHour >9){
+    console.log("Forecast start at 12, p set to 1");
+    p = 1;
+  } else if(currentHour >6){
+    console.log("Forecast start at 9, p set to 2");
+    p = 2;
+  } else if(currentHour >3){
+    console.log("Forecast start at 6, p set to 3");
+    p = 3;
+  } else{
+    console.log("Forecast start at 3, p set to 4");
+    p = 4;
+  }
+  return p;
+}
+
 function getForecast(city, country, currentHour){
   $("#forecast").empty();
   $("#forecast").append("<div class='col-lg-1' id='forecastBuffer'></div>")
@@ -66,48 +98,10 @@ function getForecast(city, country, currentHour){
 loop through forecast.list[0] to find hour
 
     */
+
 console.log("Current Hour: " + currentHour);
-var p;
-switch(currentHour){
-  case (currentHour >21)|| currentHour==0:
-  console.log("Forecast start at 0, p set to 5");
-  p = 5
-  break;
-  case currentHour >18:
-  console.log("Forecast start at 21, p set to 6");
-  p = 6;
-  break;
-  case currentHour >15:
-  console.log("Forecast start at 18, p set to 7");
-  p = 7
-  break;
-  case currentHour >12:
-  console.log("Forecast start at 15, p set to 0");
-  p = 0
-  break;
-  case currentHour >9:
-  console.log("Forecast start at 12, p set to 1");
-  p = 1
-  break;
-  case currentHour >6:
-  console.log("Forecast start at 9, p set to 2");
-  p = 2
-  break;
-  case currentHour >3:
-  console.log("Forecast start at 6, p set to 3");
-  p = 3
-  break;
-  default:
-  console.log("Forecast start at 3, p set to 4");
-  p = 4
-  break;
-}
 
-
-
-
-
-    for(p; p < resDataForecastList.length; p+=8){
+    for(p = getPForLoop(currentHour); p < resDataForecastList.length; p+=8){
       var date = new Date((resDataForecastList[p].dt)*1000);
       var dayNum = date.getUTCDay();
       var day = "";
