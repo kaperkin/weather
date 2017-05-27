@@ -50,7 +50,7 @@ function getTempC(temp){
   return Math.round((temp - 273.15));
 }
 
-function getForecast(city, country){
+function getForecast(city, country, currentHour){
   $("#forecast").empty();
   $("#forecast").append("<div class='col-lg-1' id='forecastBuffer'></div>")
   var baseURLForecast = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q="
@@ -58,16 +58,62 @@ function getForecast(city, country){
   console.log("calling forecast");
   $.getJSON(baseURLForecast).done(function (data) {
     var resDataForecast = JSON.stringify(data);
+    console.log(resDataForecast);
     resDataForecast = $.parseJSON(resDataForecast);
     resDataForecastList = resDataForecast.list;
     // LIST HAS FORECAST FOR EVERY THREE HOURS FOR NEXT FIVE DAYS
-    console.log(resDataForecast.list);
+    /*
+loop through forecast.list[0] to find hour
 
-    for(var i=4; i < resDataForecastList.length; i+=8){
-      var date = new Date((resDataForecastList[i].dt)*1000);
+    */
+console.log("Current Hour: " + currentHour);
+var p;
+switch(currentHour){
+  case (currentHour >21)|| currentHour==0:
+  console.log("Forecast start at 0, p set to 5");
+  p = 5
+  break;
+  case currentHour >18:
+  console.log("Forecast start at 21, p set to 6");
+  p = 6;
+  break;
+  case currentHour >15:
+  console.log("Forecast start at 18, p set to 7");
+  p = 7
+  break;
+  case currentHour >12:
+  console.log("Forecast start at 15, p set to 0");
+  p = 0
+  break;
+  case currentHour >9:
+  console.log("Forecast start at 12, p set to 1");
+  p = 1
+  break;
+  case currentHour >6:
+  console.log("Forecast start at 9, p set to 2");
+  p = 2
+  break;
+  case currentHour >3:
+  console.log("Forecast start at 6, p set to 3");
+  p = 3
+  break;
+  default:
+  console.log("Forecast start at 3, p set to 4");
+  p = 4
+  break;
+}
+
+
+
+
+
+    for(p; p < resDataForecastList.length; p+=8){
+      var date = new Date((resDataForecastList[p].dt)*1000);
       var dayNum = date.getUTCDay();
       var day = "";
-      var icon = "http://openweathermap.org/img/w/" + resDataForecastList[i].weather[0]["icon"] + ".png";
+      var icon = "http://openweathermap.org/img/w/" + resDataForecastList[p].weather[0]["icon"] + ".png";
+      var hours = date.getUTCHours();
+      console.log("p hours: " + hours);
 
       switch(dayNum){
         case 0:
@@ -95,9 +141,9 @@ function getForecast(city, country){
 
       $("#forecast").append("<div class='forecast col-lg-2'>" + "<p class='forecastBanner'>"
       + day + "</p><p class='forecastIcon'><img class='icon' src='" + icon + "' alt='weather icon' /></p>"
-      + "<p class='temp'><span class='temperatureF'>" + getTempF(resDataForecastList[i].main["temp"])
+      + "<p class='temp'><span class='temperatureF'>" + getTempF(resDataForecastList[p].main["temp"])
       + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>" +
-      getTempC(resDataForecastList[i].main["temp"]) + "&#730;" + "</span></p></div>"
+      getTempC(resDataForecastList[p].main["temp"]) + "&#730;" + "</span></p></div>"
     );
   }
   var tempArrayCHide = document.getElementsByClassName("temperatureC");
@@ -115,7 +161,12 @@ function getWeather(baseUrl){
   console.log("getWeather called");
   $.getJSON(baseUrl).done(function (data) {
     var resData = JSON.stringify(data);
+
     resData = $.parseJSON(resData);
+        console.log(resData.dt);
+        var date = new Date((resData.dt)*1000);
+        var currentHour = date.getUTCHours();
+
     var city = resData.name;
     var country = (resData.sys.country).toUpperCase();
     var weather = resData.weather[0];
@@ -131,7 +182,7 @@ function getWeather(baseUrl){
     $("#tempBtn").show();
 
     //call API forecast
-    getForecast(city,country);
+    getForecast(city,country, currentHour);
 
     //create map
     initMap(resData.coord["lat"], resData.coord["lon"]);
