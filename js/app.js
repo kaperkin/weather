@@ -15,7 +15,12 @@ console.log(err.code + ": " + err.message);
 // Map sample
 function initMap(lat, long) {
   $('#map').empty();
+<<<<<<< HEAD
   var src = "src='https://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + long + "&amp;zoom=13&amp;size=350x350&amp;maptype=hybrid";
+=======
+  var src = "src='https://maps.googleapis.com/maps/api/staticmap?center=" + lat
+  + "," + long + "&amp;zoom=13&amp;size=350x350&amp;maptype=hybrid&amp;key=AIzaSyB6c7H_mSZpiBv5btI2OdydpmZriPX6HWs";
+>>>>>>> 65b357cf3770e2759ad1e4e9fc50a209e485aa9d
         $('#map').append("<img " + src +"'/>")
       }
 ///end map sample
@@ -244,6 +249,8 @@ var baseUrl = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org
 + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
 console.log(baseUrl);
 getWeather(baseUrl);
+$('#tempBtn').val('C');
+$('#tempBtn').trigger('click');
 });
 
 
