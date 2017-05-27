@@ -250,6 +250,8 @@ var baseUrl = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org
 + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
 console.log(baseUrl);
 getWeather(baseUrl);
+$('#tempBtn').val('C');
+$('#tempBtn').trigger('click');
 });
 
 
