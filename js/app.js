@@ -124,9 +124,9 @@ function getDay(dayNum){
   return day;
 }
 
-function getForecast(city, country, currentHour, lat, long, timestamp){
+function getForecast(city, country, currentHour, lat, long, timestamp, currentTempF){
   $("#forecast").empty();
-  $("#forecast").append("<div class='col-lg-1' id='forecastBuffer'></div>")
+  $("#forecast").append("<div class='col-lg-1' id='forecastBuffer'></div>");
   var baseURLForecast = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q="
   + city +"," + country + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
 //  console.log("calling forecast");
@@ -138,6 +138,7 @@ function getForecast(city, country, currentHour, lat, long, timestamp){
 
 var highTempF = 0;
 var highTempIcon = 0;
+var lowTempF = currentTempF;
 var lastDay = getDay((new Date((resDataForecastList[0].dt)*1000)).getUTCDay());
     for(p = 0; p < resDataForecastList.length; p++){
       //console.log("p hours: " + hours);
@@ -145,42 +146,55 @@ var lastDay = getDay((new Date((resDataForecastList[0].dt)*1000)).getUTCDay());
       var dayNum = date.getUTCDay();
       var day = "";
       var icon = "http://openweathermap.org/img/w/" + resDataForecastList[highTempIcon].weather[0]["icon"] + ".png";
-    //  console.log(JSON.stringify(resDataForecastList[p]));
+     //console.log(JSON.stringify(resDataForecastList[0]));
       var hours = date.getUTCHours();
       var tempF = getTempF(resDataForecastList[p].main["temp"]);
       var tempC = getTempC(resDataForecastList[p].main["temp"]);
-      console.log("lastDay: " + lastDay);
+    //  console.log("Last Day: " + lastDay);
 
 
       day = getDay(dayNum);
       console.log("Current Day: " + day);
       if(lastDay == day){
-        console.log("TempF: " + tempF);
-        console.log("highTempF: " + highTempF);
+       //console.log("TempF: " + tempF);
+        //console.log("lowTempF: " + lowTempF);
         if(tempF > highTempF){
           highTempF = tempF;
           highTempIcon = p;
-          console.log("highTempIcon: " + p);
+          //console.log("highTempIcon: " + p);
 
+        } else if (tempF < lowTempF) {
+          lowTempF = tempF;
         }
       } else {
+
         $("#forecast").append("<div class='forecast col-lg-2'>" + "<p class='forecastBanner'>"
         + lastDay + "</p><p class='forecastIcon'><img class='icon' src='" + icon + "' alt='weather icon' /></p>"
-        + "<p class='temp'><span class='temperatureF'>" + highTempF
-        + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>" +
-        Math.round(((highTempF-32) * 5)/9) + "&#730;" + "</span></p></div>"
+        + "<p class='temp'><span class='temperatureF'>High: " + highTempF
+        + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>High: " +
+        Math.round(((highTempF-32) * 5)/9) + "&#730;" + "</span></p>"
+        + "<p class='temp'><span class='temperatureF'>Low: " + lowTempF
+        + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>Low: " +
+        Math.round(((lowTempF-32) * 5)/9) + "&#730;" + "</span></p></div>"
       );
-      console.log();
+    //  console.log("Day: " + lastDay + " Low temp: " + lowTempF);
       lastDay= day;
       highTempF = 0;
       }
 
   }
+  console.log($('#forecast').children().length);
+  if($('#forecast').children().length==6){
+    $("#forecast").append("<div class='col-lg-1' id='forecastBuffer2'> </div><div class='col-lg-1' id='forecastBuffer3'> </div>");
+  }
   $("#forecast").append("<div class='forecast col-lg-2'>" + "<p class='forecastBanner'>"
   + lastDay + "</p><p class='forecastIcon'><img class='icon' src='" + icon + "' alt='weather icon' /></p>"
-  + "<p class='temp'><span class='temperatureF'>" + highTempF
-  + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>" +
-  Math.round(((highTempF-32) * 5)/9) + "&#730;" + "</span></p></div>"
+  + "<p class='temp'><span class='temperatureF'>High: " + highTempF
+  + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>High: " +
+  Math.round(((highTempF-32) * 5)/9) + "&#730;" + "</span></p>"
+  + "<p class='temp'><span class='temperatureF'>Low: " + lowTempF
+  + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>Low: " +
+  Math.round(((lowTempF-32) * 5)/9) + "&#730;" + "</span></p></div>"
   );
   var tempArrayCHide = document.getElementsByClassName("temperatureC");
   for(var i=0; i<tempArrayCHide.length; i++){
@@ -220,7 +234,7 @@ function getWeather(baseUrl){
     $("#tempBtn").show();
 
     //call API forecast
-    getForecast(city,country, currentHour, lat, long, resData.dt);
+    getForecast(city,country, currentHour, lat, long, resData.dt, tempF);
 
     //create map
     initMap(lat, long);
