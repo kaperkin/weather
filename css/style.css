@@ -8,7 +8,25 @@ To Do
 */
 
 body {
-  background-color: rgba(66, 176, 244, 0.4);
+/*background-color: rgba(66, 176, 244, 0.4); */
+background-color: rgba(10, 10, 30, .8);
+color: #dfdfdf;
+}
+
+button, input{
+  background-color: rgb(110,110,110);
+}
+
+.btn-primary.active, .btn-primary:active {
+  background-color: rgb(110,110,170);
+  border-color: rgb(110,110,170);
+}
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover,
+.btn-primary.focus:active, .btn-primary:active:focus, .btn-primary:active:hover,
+.open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus,
+.open > .dropdown-toggle.btn-primary:hover{
+  background-color: rgb(110, 110, 170);
+  border-color: #dfdfdf;
 }
 
 .zipcode{
@@ -16,7 +34,7 @@ body {
 }
 
 .btn {
-  background-color: rgb(235, 235, 235);
+/*  background-color: rgb(235, 235, 235); */
 vertical-align: baseline;
 }
 
@@ -49,7 +67,8 @@ padding-top: 5%;
 }
 
 .forecast {
-  background-color: rgb(235, 235, 235);
+/*  background-color: rgb(235, 235, 235); */
+background-color: rgb(110,110,110);
   border: 1px solid #fff;
   text-align: center;
   margin-top: 3%;
@@ -65,11 +84,18 @@ padding-top: 5%;
 }
 
 .forecastBanner{
-  background-color: rgba(66, 176, 244, .6);
-  border-bottom: 2px solid #333;
+/*  background-color: rgba(66, 176, 244, .6); */
+background-color: rgb(110, 110, 170);
+/*  border-bottom: 2px solid #333; */
+border-bottom: 2px solid #dfdfdf;
   font-size: 1.8rem;
   font-weight: 600;
 
+}
+
+.jumbotron{
+/*  background-color: rgb(225, 225, 225); */
+background-color: rgb(110, 110, 110);
 }
 
 .temp span {
@@ -81,7 +107,8 @@ height: 100%;
 }
 
 .foot {
-    background-color: rgba(66, 176, 244, .6);
+  /*  background-color: rgba(66, 176, 244, .6); */
+  background-color: rgba(110, 110, 110, .6);
     margin-bottom: 0;
     margin-left: 0;
     width: 100%;
@@ -99,5 +126,6 @@ height: 100%;
 }
 
 .foot p a {
-    color: #333;
+/*    color: #333; */
+color: #dfdfdf;
 }
