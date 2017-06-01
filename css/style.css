@@ -9,23 +9,23 @@ To Do
 
 body {
 /*background-color: rgba(66, 176, 244, 0.4); */
-background-color: rgba(10, 10, 30, .8);
+background-color: rgb(110, 110, 110);
 color: #dfdfdf;
 }
 
 button, input{
-  background-color: rgb(110,110,110);
+  background-color: rgba(10, 10, 30, .8);
 }
 
 .btn-primary.active, .btn-primary:active {
-  background-color: rgb(110,110,170);
-  border-color: rgb(110,110,170);
+  background-color: rgb(10, 10, 30);
+  border-color: rgb(10, 10, 30);
 }
 .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover,
 .btn-primary.focus:active, .btn-primary:active:focus, .btn-primary:active:hover,
 .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus,
 .open > .dropdown-toggle.btn-primary:hover{
-  background-color: rgb(110, 110, 170);
+  background-color: rgb(10, 10, 30);
   border-color: #dfdfdf;
 }
 
@@ -68,7 +68,7 @@ padding-top: 5%;
 
 .forecast {
 /*  background-color: rgb(235, 235, 235); */
-background-color: rgb(110,110,110);
+background-color: rgba(10, 10, 30, .8);
   border: 1px solid #fff;
   text-align: center;
   margin-top: 3%;
@@ -85,7 +85,7 @@ background-color: rgb(110,110,110);
 
 .forecastBanner{
 /*  background-color: rgba(66, 176, 244, .6); */
-background-color: rgb(110, 110, 170);
+background-color: rgb(10, 10, 30);
 /*  border-bottom: 2px solid #333; */
 border-bottom: 2px solid #dfdfdf;
   font-size: 1.8rem;
@@ -95,7 +95,11 @@ border-bottom: 2px solid #dfdfdf;
 
 .jumbotron{
 /*  background-color: rgb(225, 225, 225); */
-background-color: rgb(110, 110, 110);
+background-color: rgba(10, 10, 30, .8);
+}
+
+.jumbotron h3{
+  float: right;
 }
 
 .temp span {
@@ -108,7 +112,7 @@ height: 100%;
 
 .foot {
   /*  background-color: rgba(66, 176, 244, .6); */
-  background-color: rgba(110, 110, 110, .6);
+  background-color: rgba(10, 10, 30, .6);
     margin-bottom: 0;
     margin-left: 0;
     width: 100%;
@@ -128,4 +132,9 @@ height: 100%;
 .foot p a {
 /*    color: #333; */
 color: #dfdfdf;
+}
+
+.foot p a:hover, .foot p a:active {
+/*    color: #333; */
+color: rgb(10, 10, 30);
 }
