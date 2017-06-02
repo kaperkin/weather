@@ -209,6 +209,7 @@ var lastDay = getDay((new Date((resDataForecastList[0].dt)*1000)).getUTCDay());
 function getWeather(baseUrl){
   // API Call Current Weather
 //  console.log("getWeather called");
+$('#description').empty();
   $.getJSON(baseUrl).done(function (data) {
     var resData = JSON.stringify(data);
 
