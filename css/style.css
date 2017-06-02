@@ -17,6 +17,11 @@ button, input{
   background-color: rgba(10, 10, 30, .8);
 }
 
+input{
+  max-width: 200px;
+}
+
+
 .btn-primary.active, .btn-primary:active {
   background-color: rgb(10, 10, 30);
   border-color: rgb(10, 10, 30);
@@ -34,23 +39,21 @@ button, input{
 }
 
 .btn {
-/*  background-color: rgb(235, 235, 235); */
 vertical-align: baseline;
 }
 
 .currentInfo {
-font-size: 2.25rem;
+  font-size: 2.75rem;
 text-align: center;
 padding-top: 5%;
 }
 
 .description{
-  font-size: 3rem;
   padding: 5%;
 }
 
 #submit {
-  font-size: 2rem;
+  font-size: 2.75rem;
 }
 
 #forecast {
@@ -62,8 +65,16 @@ padding-top: 5%;
 }
 
 .icon {
+  background-color: rgb(38, 38, 52);
+border: 1px solid rgb(34, 34, 48);
+border-radius: 5px;
   min-width: 80px;
   min-height: 80px;
+}
+
+.iconDescription {
+  background-color: rgb(135, 135, 135);
+border: 1px solid rgb(122, 122, 122);
 }
 
 .forecast {
@@ -106,8 +117,15 @@ background-color: rgba(10, 10, 30, .8);
   font-size: 2rem;
 }
 
-#map {
+.tempBtn{
+  font-size: 2.25rem;
+}
+
+.map {
 height: 100%;
+}
+.mapContainer{
+  text-align: center;
 }
 
 .foot {

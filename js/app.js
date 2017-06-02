@@ -227,8 +227,8 @@ function getWeather(baseUrl){
     var tempC = getTempC(tempK);
     var lat = resData.coord["lat"];
     var long = resData.coord["lon"];
-    $('#description').text("Current weather in " + city + " is " + weather["description"] + ".");
-    $('#description').append("<img class='icon img-rounded' src="+ image + " alt='weather icon' />");
+    $('#description').text("Current weather in " + city + " is " + weather["description"] + ".    ");
+    $('#description').append("<img class='icon iconDescription img-rounded' src="+ image + " alt='weather icon' />");
     $("#temperatureF").text("Temperature: " + tempF);
     $("#temperatureC").text("Temperature: " + tempC);
     $("#tempBtn").show();
