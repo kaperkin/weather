@@ -112,33 +112,24 @@
       var lowTempF = currentTempF;
       var lastDay = getDay((new Date((resDataForecastList[0].dt)*1000)).getUTCDay());
       for(p = 0; p < resDataForecastList.length; p++){
-        //console.log("p hours: " + hours);
         var date = new Date((resDataForecastList[p].dt)*1000);
         var dayNum = date.getUTCDay();
         var day = "";
         var icon = "http://openweathermap.org/img/w/" + resDataForecastList[highTempIcon].weather[0]["icon"] + ".png";
-        //console.log(JSON.stringify(resDataForecastList[0]));
         var hours = date.getUTCHours();
         var tempF = getTempF(resDataForecastList[p].main["temp"]);
         var tempC = getTempC(resDataForecastList[p].main["temp"]);
-        //  console.log("Last Day: " + lastDay);
 
 
         day = getDay(dayNum);
-        console.log("Current Day: " + day);
         if(lastDay == day){
-          //console.log("TempF: " + tempF);
-          //console.log("lowTempF: " + lowTempF);
           if(tempF > highTempF){
             highTempF = tempF;
             highTempIcon = p;
-            //console.log("highTempIcon: " + p);
-
           } else if (tempF < lowTempF) {
             lowTempF = tempF;
           }
         } else {
-
           $("#forecast").append("<div class='forecast col-lg-2'>" + "<p class='forecastBanner'>"
           + lastDay + "</p><p class='forecastIcon'><img class='icon' src='" + icon + "' alt='weather icon' /></p>"
           + "<p class='temp'><span class='temperatureF'>High: " + highTempF
@@ -148,13 +139,11 @@
           + "&#730;" + "</span></p><p class='temp'><span class='temperatureC'>Low: " +
           Math.round(((lowTempF-32) * 5)/9) + "&#730;" + "</span></p></div>"
         );
-        //  console.log("Day: " + lastDay + " Low temp: " + lowTempF);
         lastDay= day;
         highTempF = 0;
       }
 
     }
-    console.log($('#forecast').children().length);
     if($('#forecast').children().length==6){
       $("#forecast").append("<div class='col-lg-1' id='forecastBuffer2'> </div><div class='col-lg-1' id='forecastBuffer3'> </div>");
     }
@@ -183,7 +172,6 @@ function getWeather(baseUrl){
     var resData = JSON.stringify(data);
 
     resData = $.parseJSON(resData);
-    //    console.log(resData.dt);
     var date = new Date((resData.dt)*1000);
     var currentHour = date.getUTCHours();
 
@@ -231,11 +219,10 @@ $('#zipcode').keypress(function(e){
 
 // when submit button is clicked
 submitBtn.click(function(){
-$("#description").empty();  
+$("#description").empty();
 var zip = $('#zipcode').val();
 var baseUrl = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?zip='
 + zip + "&APPID=b05db25a78ee7104abd3a9b1f46133b5";
-console.log(baseUrl);
 getWeather(baseUrl);
 $('#tempBtn').val('C');
 $('#tempBtn').trigger('click');
@@ -246,7 +233,6 @@ $('#tempBtn').trigger('click');
 $('#tempBtn').click(function() {
   var cBtn = $("#tempBtn").val();
   if(cBtn==("F")){
-    console.log("Celsius");
     var tempArrayCShow = document.getElementsByClassName("temperatureC");
     for(var i=0; i<tempArrayCShow.length; i++){
       $(tempArrayCShow[i]).show();
