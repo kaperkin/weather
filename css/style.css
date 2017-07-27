@@ -122,16 +122,16 @@ input{
   text-align: center;
 }
 
+
 .foot {
   background-color: rgba(10, 10, 30, .6);
-  margin-bottom: 0;
-  margin-left: 0;
+  margin: auto;
+  max-width: 1500px;
   width: 100%;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100px;
-
+  padding: 25px 0 30px 0;
 }
 
 .foot p {
@@ -146,3 +146,9 @@ input{
 .foot p a:hover, .foot p a:active {
   color: rgb(10, 10, 30);
 }
+
+@media (max-width: 700px) {
+  .foot p {
+    text-align: center;
+  }
+  }
